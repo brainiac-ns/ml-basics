@@ -1,5 +1,5 @@
 import unittest
-from src.linear_regression.linear_regression import LinearReg
+from linear_regression.linear_regression import LinearReg
 import pandas as pd
 import shutil
 import os
