@@ -18,7 +18,7 @@ class LinearReg:
         model_path: str = "models/trained.sav",
     ):
         """
-        This is initializing the LinearReg class
+        This is initializing the LinearReg classa
 
         Args:
             path (str): Path to the data file
