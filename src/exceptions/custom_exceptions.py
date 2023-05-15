@@ -1,0 +1,2 @@
+class NullDfException(Exception):
+    pass
