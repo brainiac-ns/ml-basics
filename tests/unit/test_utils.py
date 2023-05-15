@@ -1,6 +1,5 @@
 import pytest
 import unittest
-from src.utils import foo
 import pandas as pd
 from src.utils import normalize_column
 import logging
