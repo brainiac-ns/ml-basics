@@ -76,7 +76,7 @@ class LinearReg:
 
     def train_model(self) -> None:
         """
-        Train the model using linear regression
+        Train the model using linear regressionn
 
         """
         trained = self.lm.fit(self.X_train, self.y_train)
