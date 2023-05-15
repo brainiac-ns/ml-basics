@@ -1,12 +1,10 @@
-from pandas import Series
 from sklearn.model_selection import train_test_split
 import pandas as pd
 from sklearn.linear_model import LinearRegression
 from utils import normalize_column
 from sklearn import metrics
 import numpy as np
-from pandas import DataFrame
-from typing import Any, List, Tuple
+from typing import List
 import pickle
 
 
@@ -23,6 +21,7 @@ class LinearReg:
         Args:
             path (str): Path to the data file
             n_jobs (int): Number of times to run during training
+            model_path (str): Path to the saved model file
 
         """
         self.df = pd.read_csv(path)
