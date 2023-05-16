@@ -34,5 +34,5 @@ jobs:
         env:
           ECR_REGISTRY: ${{ steps.login-ecr.outputs.registry }}
         run: |
-          docker build $ECR_REGISTRY/$ECR_REPOSITORY .
+          docker build -t $ECR_REGISTRY/$ECR_REPOSITORY .
           docker push $ECR_REGISTRY/$ECR_REPOSITORY
