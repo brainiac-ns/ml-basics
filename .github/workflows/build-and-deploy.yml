@@ -38,23 +38,3 @@ jobs:
         run: |
           docker build -t $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG .
           docker push $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG
-
-      # - name: Build and Push Docker image
-      #   run: |
-      #     docker build --tag ${{ env.AWS_ECR_REPOSITORY }}:${{ env.IMAGE_NAME }}-${{ github.sha }} .
-      #     docker tag ${{ env.AWS_ECR_REPOSITORY }}:${{ env.IMAGE_NAME }}-${{ github.sha }} ${{ env.AWS_ECR_REPOSITORY }}:latest
-      #     docker push --all-tags ${{ env.AWS_ECR_REPOSITORY }}:${{ env.IMAGE_NAME }}-${{ github.sha }}
-         # docker push ${{ env.AWS_ECR_REPOSITORY }}:latest
-
-      # - name: Deploy to AWS Fargate
-      #   uses: aws-actions/amazon-ecs-run-task@v1
-      #   with:
-      #     cluster: ${{ env.FARGATE_CLUSTER }}
-      #     task-definition: ${{ env.FARGATE_TASK_DEFINITION }}
-      #     launch-type: FARGATE
-      #     network-configuration: |
-      #       awsvpcConfiguration={
-      #         subnets=["subnet-12345678"],
-      #         securityGroups=["sg-12345678"],
-      #         assignPublicIp="ENABLED"
-      #       }
