@@ -38,3 +38,7 @@ jobs:
         run: |
           docker build -t $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG .
           docker push $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG
+
+      - name: Remove untagged images from ECR
+        run: |
+          aws ecr batch-delete-image --repository-name $ECR_REPOSITORY --image-ids $(aws ecr list-images --repository-name $ECR_REPOSITORY --filter "tagStatus=UNTAGGED" --query 'imageIds[*].imageDigest' --output json)
