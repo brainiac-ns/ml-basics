@@ -26,7 +26,7 @@ class TestLinearRegression(unittest.TestCase):
         }
         df = pd.DataFrame(data)
         mock_reading.return_value = df
-        lin_reg_model = LinearReg()
+        lin_reg_model = LinearReg(bucket_name="")
         lin_reg_model.preprocess(
             factorization_list=[],
             columns=["A", "B", "C"],
@@ -44,7 +44,7 @@ class TestLinearRegression(unittest.TestCase):
         data = {"A": ["cloudy", "sunny"], "B": ["sunny", "rainy"]}
         df = pd.DataFrame(data)
         mock_reading.return_value = df
-        lin_reg_model = LinearReg(df)
+        lin_reg_model = LinearReg(df, bucket_name="")
         lin_reg_model.factorize(["A", "B"])
 
         self.assertEqual(list(lin_reg_model.df["A"]), [1, 2])
@@ -60,7 +60,9 @@ class TestLinearRegression(unittest.TestCase):
         }
         df = pd.DataFrame(data)
         mock_reading.return_value = df
-        lin_reg_model = LinearReg(model_path="test-models/test.sav")
+        lin_reg_model = LinearReg(
+            model_path="test-models/test.sav", bucket_name=""
+        )
         lin_reg_model.preprocess(
             factorization_list=[],
             columns=["A", "B", "C"],
@@ -68,7 +70,7 @@ class TestLinearRegression(unittest.TestCase):
             normalize_column_name="B",
         )
 
-        lin_reg_model.train_model()
+        lin_reg_model.train()
         self.assertEqual(os.listdir("test-models/")[0], "test.sav")
 
     @patch("pandas.read_csv")
@@ -81,14 +83,16 @@ class TestLinearRegression(unittest.TestCase):
         }
         df = pd.DataFrame(data)
         mock_reading.return_value = df
-        lin_reg_model = LinearReg(model_path="test-models/test.sav")
+        lin_reg_model = LinearReg(
+            model_path="test-models/test.sav", bucket_name=""
+        )
         lin_reg_model.preprocess(
             factorization_list=[],
             columns=["A", "B", "C"],
             target=["D"],
             normalize_column_name="B",
         )
-        lin_reg_model.train_model()
+        lin_reg_model.train()
         X_test = df[["A", "B", "C"]]
         predictions = lin_reg_model.predict(X_test)
         self.assertIsNotNone(predictions)
@@ -103,13 +107,15 @@ class TestLinearRegression(unittest.TestCase):
         }
         df = pd.DataFrame(data)
         mock_reading.return_value = df
-        lin_reg_model = LinearReg(model_path="test-models/test.sav")
+        lin_reg_model = LinearReg(
+            model_path="test-models/test.sav", bucket_name=""
+        )
         lin_reg_model.preprocess(
             factorization_list=[],
             columns=["A", "B", "C"],
             target=["D"],
             normalize_column_name="B",
         )
-        lin_reg_model.train_model()
+        lin_reg_model.train()
         metric = lin_reg_model.evaluate()
         self.assertGreater(metric, 0)
