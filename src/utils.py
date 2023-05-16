@@ -1,6 +1,7 @@
 from pandas import DataFrame
 import logging
-from src.exceptions.custom_exceptions import NullDfException
+from exceptions.custom_exceptions import NullDfException
+
 LOGGER = logging.getLogger(__name__)
 
 
@@ -21,12 +22,14 @@ def normalize_column(df: DataFrame, column: str) -> DataFrame:
 
     """
     if df is None:
-        LOGGER.warning('DataFrame is None')
+        LOGGER.warning("DataFrame is None")
         raise NullDfException("DF is None")
     elif column not in df.columns:
         LOGGER.warning(
-            'DataFrame empty or column does not exist in the given DataFrame')
+            "DataFrame empty or column does not exist in the given DataFrame"
+        )
     else:
-        df[column] = (df[column] - df[column].min()) / \
-            (df[column].max() - df[column].min())
+        df[column] = (df[column] - df[column].min()) / (
+            df[column].max() - df[column].min()
+        )
     return df
