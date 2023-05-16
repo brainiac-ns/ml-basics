@@ -14,7 +14,7 @@ class LinearReg(Base):
         self,
         path: str = "data/regression/weatherHistory.csv",
         n_jobs: int = 10,
-        model_path: str = "../models/trained.sav",
+        model_path: str = "models/trained.sav",
         bucket_name: str = "ml-basic",
     ):
         """
