@@ -1,21 +1,25 @@
 import boto3
 import numpy as np
 import os
+import logging
 import pandas as pd
 from abc import ABC, abstractmethod
-from dotenv import load_dotenv
 from io import StringIO
 from typing import List
 
+LOGGER = logging.getLogger(__name__)
+
 
 class Base(ABC):
-    def __init__(self, model_path: str, bucket_name: str = "") -> None:
-        load_dotenv()
+    def __init__(self, model_path: str, bucket_name: str = "ml-basic") -> None:
         self.session = boto3.Session(
             aws_access_key_id=os.getenv("AWS_ACCESS_KEY_ID"),
             aws_secret_access_key=os.getenv("AWS_SECRET_ACCESS_KEY"),
         )
-        self.s3_client = self.session.client("s3")
+        try:
+            self.s3_client = self.session.client("s3")
+        except Exception as e:
+            LOGGER.exception(e)
 
         self.model_path = model_path
         self.bucket_name = bucket_name

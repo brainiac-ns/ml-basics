@@ -123,5 +123,4 @@ if __name__ == "__main__":
     lin_reg_model = LinearReg("data/weatherHistory.csv")
     lin_reg_model.preprocess()
     lin_reg_model.train()
-    lin_reg_model.upload_model("models/lin_reg/model.sav")
     evaluated_model = lin_reg_model.evaluate()

@@ -3,17 +3,19 @@ import os
 import shutil
 import unittest
 
-from logistic_regression.app import LogisticReg
+from classification.generic_model import ClassificationTask
 
 LOGGER = logging.getLogger(__name__)
 
 
 class TestLogisticRegression(unittest.TestCase):
     def setUp(self) -> None:
-        self.log_reg_model = LogisticReg(
+        self.log_reg_model = ClassificationTask(
             train_path="tests/integration/log_reg/test_data/test.csv",
             test_path="tests/integration/log_reg/test_data/test.csv",
             model_path="test-models/logisticreg.sav",
+            bucket_name="",
+            model_type="Logistic Regression",
         )
         os.mkdir("test-models/")
 

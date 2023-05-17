@@ -60,9 +60,7 @@ class TestLinearRegression(unittest.TestCase):
         }
         df = pd.DataFrame(data)
         mock_reading.return_value = df
-        lin_reg_model = LinearReg(
-            model_path="test-models/test.sav", bucket_name=""
-        )
+        lin_reg_model = LinearReg(model_path="test-models/test.sav", bucket_name="")
         lin_reg_model.preprocess(
             factorization_list=[],
             columns=["A", "B", "C"],
@@ -83,9 +81,7 @@ class TestLinearRegression(unittest.TestCase):
         }
         df = pd.DataFrame(data)
         mock_reading.return_value = df
-        lin_reg_model = LinearReg(
-            model_path="test-models/test.sav", bucket_name=""
-        )
+        lin_reg_model = LinearReg(model_path="test-models/test.sav", bucket_name="")
         lin_reg_model.preprocess(
             factorization_list=[],
             columns=["A", "B", "C"],
@@ -107,9 +103,7 @@ class TestLinearRegression(unittest.TestCase):
         }
         df = pd.DataFrame(data)
         mock_reading.return_value = df
-        lin_reg_model = LinearReg(
-            model_path="test-models/test.sav", bucket_name=""
-        )
+        lin_reg_model = LinearReg(model_path="test-models/test.sav", bucket_name="")
         lin_reg_model.preprocess(
             factorization_list=[],
             columns=["A", "B", "C"],
