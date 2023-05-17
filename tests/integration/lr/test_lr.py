@@ -1,19 +1,18 @@
-import logging
-import os
-import shutil
 import unittest
-
 from src.linear_regression.linear_regression import LinearReg
+import shutil
+import os
+import logging
 
 LOGGER = logging.getLogger(__name__)
 
 
 class TestLinearRegression(unittest.TestCase):
+
     def setUp(self) -> None:
         self.lin_reg_model = LinearReg(
             path="tests/integration/lr/test_data/test.csv",
-            model_path="test-models/test.sav",
-        )
+            model_path="test-models/test.sav")
         os.mkdir("test-models/")
 
     def tearDown(self) -> None:
