@@ -25,4 +25,3 @@ class TestLogisticRegression(unittest.TestCase):
         self.assertEqual(os.listdir("test-models/")[0], "logisticreg.sav")
         evaluate = self.log_reg_model.evaluate()
         self.assertGreater(evaluate, 0)
-        self.assertEqual(0,1) 
