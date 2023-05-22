@@ -1,16 +1,18 @@
 import array
 import logging
-import os
 import pickle
-from classification.model_factory import Factory
-from classification.model_types import Types
+from typing import List
+
 from base import Base
 from dotenv import load_dotenv
-from typing import List
-from sklearn.metrics import classification_report, f1_score
+from sklearn.metrics import f1_score, r2_score
+from sklearn.decomposition import PCA
+from sklearn.preprocessing import StandardScaler
+from classification.model_factory import Factory
+from classification.model_types import Types
 
+logging.basicConfig(level=logging.INFO, format="%(message)s")
 LOGGER = logging.getLogger(__name__)
-
 
 class ClassificationTask(Base):
     def __init__(
@@ -19,7 +21,7 @@ class ClassificationTask(Base):
         model_path: str = "models/logisticreg.sav",
         test_path: str = "data/log_reg/fashion-mnist_test.csv",
         bucket_name: str = "ml-basic",
-        model_type: Types = Types.SUPPORT_VECTOR_MACHINE,
+        model_type: Types = Types.XGBOOSTREGRESS.value,
     ):
         """
         Initializing the Classification class.
@@ -39,6 +41,18 @@ class ClassificationTask(Base):
         self.X_train = self.df.drop("label", axis=1).values
         self.y_test = self.test_path["label"].values
         self.X_test = self.test_path.drop("label", axis=1).values
+        model_name = {
+            Types.LOGISTIC_REGRESSION.value: "logistic_regression",
+            Types.DECISION_TREE.value: "decision_tree",
+            Types.RANDOM_FORESTS.value: "random_forests",
+            Types.SUPPORT_VECTOR_MACHINE.value: "support_vector_machine",
+            Types.GAUSSIAN_NB.value: "gaussian_nb",
+            Types.KNN.value: "kneighbors_classifier",
+            Types.XGBOOSTCLASS.value: "xgboost_classifier",
+            Types.XGBOOSTREGRESS.value: "xgboost_regressor"
+        }.get(model_type, "model_type")
+        self.model_path = f"models/{model_name}.sav"
+        self.model_type = model_type
 
     def train(self) -> None:
         """
@@ -47,6 +61,7 @@ class ClassificationTask(Base):
         LOGGER.info("Training started")
         generic_model = self.model.fit(self.X_train, self.y_train)
         pickle.dump(generic_model, open(self.model_path, "wb"))
+        self.upload_model(self.model_path)
         LOGGER.info("Training ended")
 
     def predict(self, X_test) -> array:
@@ -69,8 +84,8 @@ class ClassificationTask(Base):
         """
         LOGGER.info("Evaluation ended")
         pred = self.model.predict(self.X_test)
-        print(classification_report(self.y_test, pred))
-        return f1_score(self.y_test, pred, average="micro")
+        print(self.model_type)
+        return r2_score(self.y_test, pred) if (self.model_type == Types.XGBOOSTREGRESS.value) else f1_score(self.y_test, pred, average="micro")
 
     def preprocess(
         self,
@@ -78,15 +93,29 @@ class ClassificationTask(Base):
         columns: List[str],
         target: List[str],
         normalize_column_name: str,
+        n_components: int = 2
     ) -> None:
         pass
 
 
 if __name__ == "__main__":
     load_dotenv()
+    LOGGER.info("AAAAAAAAAAAAAAAAAAAAA")
     generic_model = ClassificationTask(
-        bucket_name="", model_type=os.getenv("MODEL_TYPE")
+        bucket_name="ml-basic"
     )
     generic_model.train()
     evaluated = generic_model.evaluate()
     print(evaluated)
+    print("---------------------")
+    scaler = StandardScaler()
+    scaled_train_data = scaler.fit_transform(generic_model.X_train)
+    scaled_test_data = scaler.transform(generic_model.X_test)
+
+    pca = PCA(n_components=2)
+    pca.fit(scaled_train_data)
+    x_train_pca = pca.transform(scaled_train_data)
+    x_test_pca = pca.transform(scaled_test_data)
+
+    print(scaled_train_data.shape)
+    print(x_train_pca.shape)

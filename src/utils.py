@@ -1,5 +1,7 @@
-from pandas import DataFrame
 import logging
+
+from pandas import DataFrame
+
 from exceptions.custom_exceptions import NullDfException
 
 LOGGER = logging.getLogger(__name__)

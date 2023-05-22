@@ -1,8 +1,9 @@
-import unittest
-from linear_regression.linear_regression import LinearReg
-import shutil
-import os
 import logging
+import os
+import shutil
+import unittest
+
+from linear_regression.linear_regression import LinearReg
 
 LOGGER = logging.getLogger(__name__)
 

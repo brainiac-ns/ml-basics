@@ -1,12 +1,14 @@
-from sklearn.model_selection import train_test_split
-import pandas as pd
-from sklearn.linear_model import LinearRegression
-from utils import normalize_column
-from sklearn import metrics
-import numpy as np
-from typing import List
 import pickle
+from typing import List
+
+import numpy as np
+import pandas as pd
+from sklearn import metrics
+from sklearn.linear_model import LinearRegression
+from sklearn.model_selection import train_test_split
+
 from base import Base
+from utils import normalize_column
 
 
 class LinearReg(Base):

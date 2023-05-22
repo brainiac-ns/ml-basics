@@ -1,17 +1,20 @@
-import boto3
-import numpy as np
-import os
 import logging
-import pandas as pd
+import os
 from abc import ABC, abstractmethod
+from dotenv import load_dotenv
 from io import StringIO
 from typing import List
+
+import boto3
+import numpy as np
+import pandas as pd
 
 LOGGER = logging.getLogger(__name__)
 
 
 class Base(ABC):
     def __init__(self, model_path: str, bucket_name: str = "ml-basic") -> None:
+        load_dotenv()
         self.session = boto3.Session(
             aws_access_key_id=os.getenv("AWS_ACCESS_KEY_ID"),
             aws_secret_access_key=os.getenv("AWS_SECRET_ACCESS_KEY"),

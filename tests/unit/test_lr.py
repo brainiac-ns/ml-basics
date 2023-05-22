@@ -1,10 +1,12 @@
-import unittest
-from linear_regression.linear_regression import LinearReg
-import pandas as pd
-import shutil
-import os
 import logging
+import os
+import shutil
+import unittest
 from unittest.mock import patch
+
+import pandas as pd
+
+from linear_regression.linear_regression import LinearReg
 
 LOGGER = logging.getLogger(__name__)
 
