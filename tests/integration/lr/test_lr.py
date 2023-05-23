@@ -2,15 +2,18 @@ import logging
 import os
 import shutil
 import unittest
+from unittest.mock import MagicMock, patch
 
-from linear_regression.linear_regression import LinearReg
+from regression.regression_model import RegressionTask
 
 LOGGER = logging.getLogger(__name__)
 
 
 class TestLinearRegression(unittest.TestCase):
-    def setUp(self) -> None:
-        self.lin_reg_model = LinearReg(
+    @patch("boto3.Session.client")
+    def setUp(self, mock_client) -> None:
+        mock_client.return_value.upload_file = MagicMock()
+        self.lin_reg_model = RegressionTask(
             path="tests/integration/lr/test_data/test.csv",
             model_path="test-models/test.sav",
             bucket_name="",

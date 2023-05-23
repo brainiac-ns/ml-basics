@@ -2,20 +2,24 @@ import logging
 import os
 import shutil
 import unittest
+from unittest.mock import MagicMock, patch
 
-from classification.generic_model import ClassificationTask
+from classification.classification_model import ClassificationTask
+from classification.classification_types import Types
 
 LOGGER = logging.getLogger(__name__)
 
 
 class TestLogisticRegression(unittest.TestCase):
-    def setUp(self) -> None:
+    @patch("boto3.Session.client")
+    def setUp(self, mock_client) -> None:
+        mock_client.return_value.upload_file = MagicMock()
         self.log_reg_model = ClassificationTask(
             train_path="tests/integration/log_reg/test_data/test.csv",
             test_path="tests/integration/log_reg/test_data/test.csv",
             model_path="test-models/logisticreg.sav",
             bucket_name="",
-            model_type="Logistic Regression",
+            model_type=Types.LOGISTIC_REGRESSION.value,
         )
         os.mkdir("test-models/")
 

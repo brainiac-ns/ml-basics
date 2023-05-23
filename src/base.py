@@ -1,13 +1,13 @@
 import logging
 import os
 from abc import ABC, abstractmethod
-from dotenv import load_dotenv
 from io import StringIO
 from typing import List
 
 import boto3
 import numpy as np
 import pandas as pd
+from dotenv import load_dotenv
 
 LOGGER = logging.getLogger(__name__)
 
