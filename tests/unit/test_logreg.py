@@ -31,12 +31,12 @@ class TestLogisticRegression(unittest.TestCase):
         mock_reading.return_value = df
         mock_client.upload_file.return_value = None
         log_reg_model = ClassificationTask(
-            model_path="test-models/test.sav",
+            model_path="models/test.sav",
             bucket_name="",
             model_type=Types.LOGISTIC_REGRESSION.value,
         )
         log_reg_model.train()
-        self.assertEqual(os.listdir("test-models/")[0], "test.sav")
+        self.assertEqual(os.listdir("models/")[2], "test.sav")
 
     @patch("boto3.Session.client")
     @patch("pandas.read_csv")

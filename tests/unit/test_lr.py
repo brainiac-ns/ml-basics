@@ -74,7 +74,7 @@ class TestLinearRegression(unittest.TestCase):
         )
 
         lin_reg_model.train()
-        self.assertEqual(os.listdir("models/")[2], "trained.sav")
+        self.assertEqual(os.listdir("models/")[3], "trained.sav")
 
     @patch("boto3.Session.client")
     @patch("pandas.read_csv")
