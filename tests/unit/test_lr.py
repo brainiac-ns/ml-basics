@@ -64,7 +64,7 @@ class TestLinearRegression(unittest.TestCase):
         }
         df = pd.DataFrame(data)
         mock_reading.return_value = df
-        mock_client.return_value.upload_file = None
+        mock_client.upload_file.return_value = None
         lin_reg_model = RegressionTask(model_path="models/trained.sav", bucket_name="")
         lin_reg_model.preprocess(
             factorization_list=[],
@@ -74,7 +74,7 @@ class TestLinearRegression(unittest.TestCase):
         )
 
         lin_reg_model.train()
-        self.assertEqual(os.listdir("test-models")[0], "trained.sav")
+        self.assertEqual(os.listdir("models/")[2], "trained.sav")
 
     @patch("boto3.Session.client")
     @patch("pandas.read_csv")
@@ -87,7 +87,7 @@ class TestLinearRegression(unittest.TestCase):
         }
         df = pd.DataFrame(data)
         mock_reading.return_value = df
-        mock_client.return_value.upload_file = None
+        mock_client.upload_file.return_value = None
         lin_reg_model = RegressionTask(model_path="models/trained.sav", bucket_name="")
         lin_reg_model.preprocess(
             factorization_list=[],
@@ -111,7 +111,7 @@ class TestLinearRegression(unittest.TestCase):
         }
         df = pd.DataFrame(data)
         mock_reading.return_value = df
-        mock_client.return_value.upload_file = None
+        mock_client.upload_file.return_value = None
         lin_reg_model = RegressionTask(model_path="models/trained.sav", bucket_name="")
         lin_reg_model.preprocess(
             factorization_list=[],

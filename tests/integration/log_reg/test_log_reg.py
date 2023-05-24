@@ -13,7 +13,7 @@ LOGGER = logging.getLogger(__name__)
 class TestLogisticRegression(unittest.TestCase):
     @patch("boto3.Session.client")
     def setUp(self, mock_client) -> None:
-        mock_client.return_value.upload_file = None
+        mock_client.upload_file.return_value = None
         self.log_reg_model = ClassificationTask(
             train_path="tests/integration/log_reg/test_data/test.csv",
             test_path="tests/integration/log_reg/test_data/test.csv",

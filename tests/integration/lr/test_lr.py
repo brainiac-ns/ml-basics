@@ -12,7 +12,7 @@ LOGGER = logging.getLogger(__name__)
 class TestLinearRegression(unittest.TestCase):
     @patch("boto3.Session.client")
     def setUp(self, mock_client) -> None:
-        mock_client.return_value.upload_file = None
+        mock_client.upload_file.return_value = None
         self.lin_reg_model = RegressionTask(
             path="tests/integration/lr/test_data/test.csv",
             model_path="test-models/test.sav",
