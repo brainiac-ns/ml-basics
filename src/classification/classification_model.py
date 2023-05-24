@@ -67,10 +67,12 @@ class ClassificationTask(Base):
 
     def evaluate(self) -> array:
         """
-        Evaluate the performance of a classification model by generating a classification report.
+        Evaluate the performance of a classification model by generating
+        a classification report.
 
         Returns:
-        array: A textual summary of the classification performance(precision, recall, F1-score, and support)
+        array: A textual summary of the classification
+        performance(precision, recall, F1-score, and support)
         """
         LOGGER.info("Evaluation ended")
         pred = self.model.predict(self.X_test)

@@ -39,11 +39,7 @@ class RegressionTask(Base):
         factory = Factory(model_type)
         self.model = factory()
         self.test_path = self.read_data(path)
-        model_name = {
-            Types.LINEAR_REGRESSION.value: "linear_regression",
-            Types.XGBOOSTREGRESS.value: "xgboostregressor",
-        }.get(model_type, "model_type")
-        self.model_path = f"models/{model_name}.sav"
+        self.model_path = model_path
         self.model_type = model_type
 
     def preprocess(
