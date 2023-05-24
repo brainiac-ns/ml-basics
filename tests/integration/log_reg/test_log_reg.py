@@ -2,7 +2,7 @@ import logging
 import os
 import shutil
 import unittest
-from unittest.mock import MagicMock, patch
+from unittest.mock import patch
 
 from classification.classification_model import ClassificationTask
 from classification.classification_types import Types
@@ -13,7 +13,7 @@ LOGGER = logging.getLogger(__name__)
 class TestLogisticRegression(unittest.TestCase):
     @patch("boto3.Session.client")
     def setUp(self, mock_client) -> None:
-        mock_client.return_value.upload_file = MagicMock()
+        mock_client.return_value.upload_file = None
         self.log_reg_model = ClassificationTask(
             train_path="tests/integration/log_reg/test_data/test.csv",
             test_path="tests/integration/log_reg/test_data/test.csv",

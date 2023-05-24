@@ -2,7 +2,7 @@ import logging
 import os
 import shutil
 import unittest
-from unittest.mock import MagicMock, patch
+from unittest.mock import patch
 
 import pandas as pd
 
@@ -29,7 +29,7 @@ class TestLogisticRegression(unittest.TestCase):
         }
         df = pd.DataFrame(data)
         mock_reading.return_value = df
-        mock_client.return_value.upload_file = MagicMock()
+        mock_client.return_value.upload_file = None
         log_reg_model = ClassificationTask(
             model_path="test-models/test.sav",
             bucket_name="",
@@ -48,7 +48,7 @@ class TestLogisticRegression(unittest.TestCase):
         }
         df = pd.DataFrame(data)
         mock_reading.return_value = df
-        mock_client.return_value.upload_file = MagicMock()
+        mock_client.return_value.upload_file = None
         log_reg_model = ClassificationTask(
             model_path="test-models/test.sav",
             bucket_name="",
@@ -69,7 +69,7 @@ class TestLogisticRegression(unittest.TestCase):
         }
         df = pd.DataFrame(data)
         mock_reading.return_value = df
-        mock_client.return_value.upload_file = MagicMock()
+        mock_client.return_value.upload_file = None
         log_reg_model = ClassificationTask(
             model_path="test-models/test.sav",
             bucket_name="",

@@ -41,16 +41,7 @@ class ClassificationTask(Base):
         self.X_train = self.df.drop("label", axis=1).values
         self.y_test = self.test_path["label"].values
         self.X_test = self.test_path.drop("label", axis=1).values
-        model_name = {
-            Types.LOGISTIC_REGRESSION.value: "logistic_regression",
-            Types.DECISION_TREE.value: "decision_tree",
-            Types.RANDOM_FORESTS.value: "random_forests",
-            Types.SUPPORT_VECTOR_MACHINE.value: "support_vector_machine",
-            Types.GAUSSIAN_NB.value: "gaussian_nb",
-            Types.KNN.value: "kneighbors_classifier",
-            Types.XGBOOSTCLASS.value: "xgboost_classifier",
-        }.get(model_type, "model_type")
-        self.model_path = f"models/{model_name}.sav"
+        self.model_path = model_path
         self.model_type = model_type
 
     def train(self) -> None:

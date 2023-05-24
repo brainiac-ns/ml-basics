@@ -2,7 +2,7 @@ import logging
 import os
 import shutil
 import unittest
-from unittest.mock import MagicMock, patch
+from unittest.mock import patch
 
 import pandas as pd
 
@@ -64,7 +64,7 @@ class TestLinearRegression(unittest.TestCase):
         }
         df = pd.DataFrame(data)
         mock_reading.return_value = df
-        mock_client.return_value.upload_file = MagicMock()
+        mock_client.return_value.upload_file = None
         lin_reg_model = RegressionTask(model_path="models/trained.sav", bucket_name="")
         lin_reg_model.preprocess(
             factorization_list=[],
@@ -87,7 +87,7 @@ class TestLinearRegression(unittest.TestCase):
         }
         df = pd.DataFrame(data)
         mock_reading.return_value = df
-        mock_client.return_value.upload_file = MagicMock()
+        mock_client.return_value.upload_file = None
         lin_reg_model = RegressionTask(model_path="models/trained.sav", bucket_name="")
         lin_reg_model.preprocess(
             factorization_list=[],
@@ -111,7 +111,7 @@ class TestLinearRegression(unittest.TestCase):
         }
         df = pd.DataFrame(data)
         mock_reading.return_value = df
-        mock_client.return_value.upload_file = MagicMock()
+        mock_client.return_value.upload_file = None
         lin_reg_model = RegressionTask(model_path="models/trained.sav", bucket_name="")
         lin_reg_model.preprocess(
             factorization_list=[],

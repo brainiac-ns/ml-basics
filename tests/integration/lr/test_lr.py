@@ -2,7 +2,7 @@ import logging
 import os
 import shutil
 import unittest
-from unittest.mock import MagicMock, patch
+from unittest.mock import patch
 
 from regression.regression_model import RegressionTask
 
@@ -12,7 +12,7 @@ LOGGER = logging.getLogger(__name__)
 class TestLinearRegression(unittest.TestCase):
     @patch("boto3.Session.client")
     def setUp(self, mock_client) -> None:
-        mock_client.return_value.upload_file = MagicMock()
+        mock_client.return_value.upload_file = None
         self.lin_reg_model = RegressionTask(
             path="tests/integration/lr/test_data/test.csv",
             model_path="test-models/test.sav",
