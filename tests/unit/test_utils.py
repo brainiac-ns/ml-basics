@@ -1,9 +1,11 @@
-import pytest
-import unittest
-import pandas as pd
-from utils import normalize_column
 import logging
+import unittest
+
+import pandas as pd
+import pytest
+
 from exceptions.custom_exceptions import NullDfException
+from utils import normalize_column
 
 LOGGER = logging.getLogger(__name__)
 
