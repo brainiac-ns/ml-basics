@@ -17,6 +17,6 @@ jobs:
           python src/classification/classification_model.py
 
           # Create CML report
-          cat src/metrics.txt >> report.md
+          cat metrics.txt >> report.md
           # echo '![](./plot.png "Confusion Matrix")' >> report.md
           cml comment create report.md
