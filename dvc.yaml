@@ -1,0 +1,7 @@
+stages:
+  train:
+    cmd: python src/classification/classification_model.py
+    deps:
+    - data
+    outs:
+    - models

@@ -1,0 +1,14 @@
+schema: '2.0'
+stages:
+  train:
+    cmd: python src/classification/classification_model.py
+    deps:
+    - path: data
+      md5: 8ec2c9b31a3c308c8e3d683cab97dcb9.dir
+      size: 44358468
+      nfiles: 2
+    outs:
+    - path: models
+      md5: 5529321219d94001c72284aa3adc0df7.dir
+      size: 63569
+      nfiles: 1
