@@ -96,9 +96,9 @@ if __name__ == "__main__":
     load_dotenv()
     classification_model = ClassificationTask(
         bucket_name="",
-        test_path="data/log_reg/fashion-mnist_test.csv",
-        train_path="data/log_reg/fashion-mnist_train.csv",
-        model_path="models/logisticreg.sav",
+        test_path="../data/log_reg/fashion-mnist_test.csv",
+        train_path="../data/log_reg/fashion-mnist_train.csv",
+        model_path="../models/logisticreg.sav",
     )
     classification_model.train()
     evaluated = classification_model.evaluate()
