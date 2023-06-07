@@ -1,5 +1,5 @@
-boto3==1.26.135
-botocore==1.29.135
+boto3==1.26.76
+botocore==1.29.76
 numpy==1.23.5
 pandas==1.5.3
 pytest==7.2.2
@@ -7,3 +7,4 @@ python-dotenv==1.0.0
 scikit-learn==1.2.2
 xgboost==1.7.5
 dvc==2.58.2
+dvc-s3==2.22.0
