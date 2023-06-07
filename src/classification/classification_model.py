@@ -53,7 +53,7 @@ class ClassificationTask(Base):
         classification_model = self.model.fit(self.X_train, self.y_train)
         os.mkdir("models")
         pickle.dump(classification_model, open(self.model_path, "wb"))
-        # self.upload_model(self.model_path)
+        self.upload_model(self.model_path)
         LOGGER.info("Training ended")
 
     def predict(self, X_test) -> array:
@@ -95,10 +95,10 @@ class ClassificationTask(Base):
 if __name__ == "__main__":
     load_dotenv()
     classification_model = ClassificationTask(
-        bucket_name="",
-        test_path="../data/log_reg/fashion-mnist_test.csv",
-        train_path="../data/log_reg/fashion-mnist_train.csv",
-        model_path="../models/logisticreg.sav",
+        bucket_name="ml-basic",
+        test_path="data/log_reg/fashion-mnist_test.csv",
+        train_path="data/log_reg/fashion-mnist_train.csv",
+        model_path="models/logisticreg.sav",
     )
     classification_model.train()
     evaluated = classification_model.evaluate()
