@@ -1,4 +1,5 @@
 import array
+import json
 import logging
 import pickle
 import os
@@ -53,7 +54,7 @@ class ClassificationTask(Base):
         classification_model = self.model.fit(self.X_train, self.y_train)
         os.mkdir("models")
         pickle.dump(classification_model, open(self.model_path, "wb"))
-        self.upload_model(self.model_path)
+        # self.upload_model(self.model_path)
         LOGGER.info("Training ended")
 
     def predict(self, X_test) -> array:
@@ -104,4 +105,9 @@ if __name__ == "__main__":
     evaluated = classification_model.evaluate()
     print(evaluated)
     with open("metrics.txt", "w") as outfile:
-        outfile.write("Accuracy: " + str(evaluated) + "\n")
+        outfile.write("F1 Score: " + str(evaluated) + "\n")
+
+    metrics = {"F1 Score": evaluated}
+
+    with open("metrics.json", "w") as file:
+        json.dump(metrics, file)

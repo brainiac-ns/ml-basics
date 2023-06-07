@@ -1,7 +1,9 @@
 stages:
   train:
-    cmd: python src/classification/classification_model.py
+    cmd: pip install -r requirements.txt && export PYTHONPATH=src && python src/classification/classification_model.py
     deps:
     - data
     outs:
     - models
+    metrics:
+    - metrics.json
