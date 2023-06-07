@@ -11,7 +11,7 @@ jobs:
           REPO_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
           pip install -r requirements.txt
-          python train.py  # generate plot.png
+          python src/classification/classification_model.py
 
           # Create CML report
           cat metrics.txt >> report.md
