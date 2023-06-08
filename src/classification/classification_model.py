@@ -1,6 +1,8 @@
 import array
+import json
 import logging
 import pickle
+import os
 from typing import List
 
 from dotenv import load_dotenv
@@ -50,8 +52,9 @@ class ClassificationTask(Base):
         """
         LOGGER.info("Training started")
         classification_model = self.model.fit(self.X_train, self.y_train)
+        os.mkdir("models")
         pickle.dump(classification_model, open(self.model_path, "wb"))
-        self.upload_model(self.model_path)
+        # self.upload_model(self.model_path)
         LOGGER.info("Training ended")
 
     def predict(self, X_test) -> array:
@@ -92,7 +95,19 @@ class ClassificationTask(Base):
 
 if __name__ == "__main__":
     load_dotenv()
-    classification_model = ClassificationTask(bucket_name="ml-basic")
+    classification_model = ClassificationTask(
+        bucket_name="ml-basic",
+        test_path="data/log_reg/fashion-mnist_test.csv",
+        train_path="data/log_reg/fashion-mnist_train.csv",
+        model_path="models/logisticreg.sav",
+    )
     classification_model.train()
     evaluated = classification_model.evaluate()
     print(evaluated)
+    with open("metrics.txt", "w") as outfile:
+        outfile.write("F1 Score: " + str(evaluated) + "\n")
+
+    metrics = {"F1 Score": evaluated}
+
+    with open("metrics.json", "w") as file:
+        json.dump(metrics, file)

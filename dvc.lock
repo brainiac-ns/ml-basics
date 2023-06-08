@@ -1,0 +1,17 @@
+schema: '2.0'
+stages:
+  train:
+    cmd: pip install -r requirements.txt && export PYTHONPATH=src && python src/classification/classification_model.py
+    deps:
+    - path: data
+      md5: 29cfcd308a348fefbbccd6eccf0ffbf1.dir
+      size: 44371182
+      nfiles: 2
+    outs:
+    - path: metrics.json
+      md5: 8b847616aaa361adfa6b979fbc26b0be
+      size: 20
+    - path: models
+      md5: 8a448d714fbd929dfc4eb4ba714ab859.dir
+      size: 63569
+      nfiles: 1
