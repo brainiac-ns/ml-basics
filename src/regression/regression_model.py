@@ -73,6 +73,7 @@ class RegressionTask(Base):
             Series: Target variable
 
         """
+        LOGGER.info("Preprocessing... (normalization and pca)")
         self.df = normalize_column(self.df, normalize_column_name)
         self.factorize(factorization_list)
 
@@ -102,6 +103,7 @@ class RegressionTask(Base):
             columns: Column names that need to be factorized
 
         """
+        LOGGER.info("Factorizing...")
         for c in columns:
             self.df[c] = pd.factorize(self.df[c])[0] + 1
 
@@ -124,6 +126,7 @@ class RegressionTask(Base):
         - metric: Root mean squared error.
 
         """
+        LOGGER.info("Evaluation started")
         metric = np.sqrt(
             metrics.mean_squared_error(self.y_test, self.predict(self.X_test))
         )
