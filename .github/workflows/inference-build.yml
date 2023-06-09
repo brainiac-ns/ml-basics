@@ -28,7 +28,7 @@ jobs:
         run: echo "::set-output name=changed::$(git diff --name-only ${{ github.event.before }} ${{ github.sha }} | grep -c '^src/inference/')"
 
       - name: Build and push Docker image
-        if: steps.check_changes.outputs.changed > 0
+        # if: steps.check_changes.outputs.changed > 0
         run: |
           docker build --tag ghcr.io/${{ github.repository_owner }}/${{ env.IMAGE_NAME }}:${{ github.sha }} src/inference
           docker tag ghcr.io/${{ github.repository_owner }}/${{ env.IMAGE_NAME }}:${{ github.sha }} ghcr.io/${{ github.repository_owner }}/${{ env.IMAGE_NAME }}:latest
