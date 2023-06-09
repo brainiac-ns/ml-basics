@@ -11,8 +11,6 @@ s3_client = boto3.client("s3")
 bucket_name = "ml-basic"
 model_key = "models/lin_reg/model.sav"
 
-# trigger workflow test
-
 
 @app.route("/health")
 def health():
