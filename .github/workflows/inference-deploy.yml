@@ -10,7 +10,7 @@ on:
 env:
   IMAGE_NAME: inference
   AWS_REGION: us-east-1
-  ECR_REPOSITORY: ml-basics
+  ECR_REPOSITORY: inference
   # IMAGE_TAG: latest
 
 jobs:
