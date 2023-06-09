@@ -1,9 +1,11 @@
-name: Docker Build and Push
+name: Inference Docker Build and Push
 
 on:
   push:
     branches:
       - main
+    paths:
+      - src/inference/**
 
 env:
   IMAGE_NAME: inference
@@ -23,12 +25,7 @@ jobs:
       - name: Login to GitHub Container Registry
         run: echo "${{ secrets.GITHUB_TOKEN }}" | docker login ghcr.io -u ${{ github.actor }} --password-stdin
 
-      - name: Check for changes in 'src/inference' folder
-        id: check_changes
-        run: echo "::set-output name=changed::$(git diff --name-only ${{ github.event.before }} ${{ github.sha }} | grep -c '^src/inference/')"
-
       - name: Build and push Docker image
-        # if: steps.check_changes.outputs.changed > 0
         run: |
           docker build --tag ghcr.io/${{ github.repository_owner }}/${{ env.IMAGE_NAME }}:${{ github.sha }} src/inference
           docker tag ghcr.io/${{ github.repository_owner }}/${{ env.IMAGE_NAME }}:${{ github.sha }} ghcr.io/${{ github.repository_owner }}/${{ env.IMAGE_NAME }}:latest
