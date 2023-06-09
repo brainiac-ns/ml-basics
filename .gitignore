@@ -4,6 +4,8 @@ __pycache__/
 *$py.class
 data/
 .vscode
+.dvc
+metrics.json
 models/
 # C extensions
 *.so
