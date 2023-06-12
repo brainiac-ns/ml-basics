@@ -39,3 +39,12 @@ jobs:
         run: |
           docker build -t $ECR_REGISTRY/$ECR_REPOSITORY src/inference
           docker push $ECR_REGISTRY/$ECR_REPOSITORY
+
+      - name: Run Fargate task
+        env:
+          CLUSTER_NAME: ml-basics
+          TASK_DEFINITION: fargate
+          SERVICE_NAME: inference-service
+          IMAGE: ${{ steps.login-ecr.outputs.registry }}/${{ env.ECR_REPOSITORY }}:${{ github.sha }}
+        run: |
+          aws ecs update-service --cluster $CLUSTER_NAME --service $SERVICE_NAME --force-new-deployment --region $AWS_REGION
