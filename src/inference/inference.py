@@ -24,6 +24,11 @@ def healthh():
     return "ALIVEEEEE"
 
 
+@app.route("/healthhh")
+def healthhh():
+    return "ALIVEEEEE3"
+
+
 @app.route("/", methods=["POST"])
 def hello():
     start_time = time.time()
